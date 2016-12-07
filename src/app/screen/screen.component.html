@@ -1,0 +1,17 @@
+<svg
+  attr.viewBox = "0 0 {{width}} {{height}}">
+
+  <g>
+    <path
+      *ngFor = "let segment of drawing.segments"
+      [attr.d] = segment.path>
+    </path>
+  </g>
+
+  <circle
+    #heading
+    class = heading
+    [attr.cx] = headingPoint.x
+    [attr.cy] = headingPoint.y
+    r = 2></circle>
+</svg>

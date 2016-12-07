@@ -12,14 +12,15 @@
       "main": "main.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
-      "prefix": "app",
+      "prefix": "ng2-kw",
       "mobile": false,
       "styles": [
-        "styles.css"
+        "../node_modules/reset-css/reset.css",
+        "styles.scss"
       ],
       "scripts": [],
-      "environments": {
-        "source": "environments/environment.ts",
+      "environments": 
+{        "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
@@ -38,7 +39,7 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "scss",
     "prefixInterfaces": false
   }
 }
