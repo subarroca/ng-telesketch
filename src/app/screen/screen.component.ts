@@ -110,6 +110,8 @@ export class ScreenComponent implements OnInit {
         this.setHeading(this.headingPoint.x + xDir * this.DELTA, this.headingPoint.y + yDir * this.DELTA);
         this.updateSegment();
       }
+    } else {
+      this.setHeading(this.headingPoint.x + xDir * this.DELTA, this.headingPoint.y + yDir * this.DELTA);
     }
 
     this.lastDirection = direction;
