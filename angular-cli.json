@@ -16,7 +16,6 @@
       "mobile": false,
       "styles": [
         "../node_modules/reset-css/reset.css",
-        "https://fonts.googleapis.com/css?family=Roboto:700",
         "styles.scss"
       ],
       "scripts": [],
