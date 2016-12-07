@@ -2,7 +2,6 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 
 import { Observable } from 'rxjs/Rx';
 
-import { Segment } from '../shared/segment';
 import { Point } from '../shared/point';
 import { Image } from '../shared/image';
 

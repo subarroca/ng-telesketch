@@ -14,7 +14,7 @@ export class Segment {
   }
 
   get path() {
-    if (this.start.x & this.start.y && this.end.x && this.end.y) {
+    if (this.start.x && this.start.y && this.end.x && this.end.y) {
       return `M${this.start.x},${this.start.y}L${this.end.x},${this.end.y}`;
     }
   }

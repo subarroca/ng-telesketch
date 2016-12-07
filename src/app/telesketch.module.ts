@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './telesketch.component';
 import { ScreenComponent } from './screen/screen.component';
 
 @NgModule({
@@ -19,4 +19,4 @@ import { ScreenComponent } from './screen/screen.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class TelesketchModule { }
