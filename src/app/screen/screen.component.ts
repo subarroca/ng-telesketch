@@ -22,6 +22,7 @@ export class ScreenComponent implements OnInit {
 
   private DELTA: number = 5;
   private lastDirection: string;
+  private isDrawing: boolean = true;
 
 
   constructor(
@@ -56,12 +57,14 @@ export class ScreenComponent implements OnInit {
             break;
 
           case 'Space':
-            console.log('space');
-            break;
+            this.isDrawing = !this.isDrawing;
+            if (!this.isDrawing) {
+              this.endSegment();
+            } else {
+              this.startSegment();
+            }
 
-          // default:
-          //   // code...
-          //   break;
+            break;
         }
       });
 
@@ -98,17 +101,19 @@ export class ScreenComponent implements OnInit {
   }
 
   parseKeyDown(direction: string, xDir: number, yDir: number) {
-    if (this.lastDirection !== direction) {
-      this.endSegment();
-      this.startSegment();
-    } else {
-      this.updateSegment();
+    if (this.isDrawing) {
+      if (this.lastDirection !== direction) {
+        this.endSegment();
+        this.startSegment();
+        this.setHeading(this.headingPoint.x + xDir * this.DELTA, this.headingPoint.y + yDir * this.DELTA);
+
+      } else {
+        this.setHeading(this.headingPoint.x + xDir * this.DELTA, this.headingPoint.y + yDir * this.DELTA);
+        this.updateSegment();
+      }
     }
 
-    this.setHeading(this.headingPoint.x + xDir * this.DELTA, this.headingPoint.y + yDir * this.DELTA);
     this.lastDirection = direction;
-
-
     this.element.nativeElement.style.setProperty('--direction-x', xDir);
     this.element.nativeElement.style.setProperty('--direction-y', -yDir);
   }

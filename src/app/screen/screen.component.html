@@ -13,6 +13,7 @@
     <circle
       #heading
       class = heading
+      [class.heading--pause] = !isDrawing
       [attr.cx] = headingPoint.x
       [attr.cy] = headingPoint.y
       r = 2></circle>
@@ -22,6 +23,14 @@
     <div class="control control--x">
       <span></span>
     </div>
+
+    <div
+      class = "control control--bar"
+      [class.control--drawing] = isDrawing
+      [class.control--pause] = !isDrawing>
+        Drawing
+    </div>
+
     <div class="control control--y">
       <span></span>
     </div>
