@@ -1,6 +1,8 @@
 $line-color: #1f343c;
 $bg-color : #a28e6b;
 $frame-color: #c00;
+$control-color: #ffd;
+$control-shadow-color: #666;
 
 .screen{
   background: radial-gradient(lighten($bg-color, 20),$bg-color);
@@ -8,7 +10,7 @@ $frame-color: #c00;
   width: calc(var(--width) * 1px);
   height: calc(var(--height) * 1px);
   border-radius: 20px;
-  margin: 40px 40px 120px;
+  margin: 40px 40px 0;
 
   box-shadow:
     0 2px 4px mix($bg-color, $line-color) inset,
@@ -55,5 +57,68 @@ path {
     0 -5px 0 rgba(darken($frame-color, 10), 0.3) inset,
     0 -8px 0 rgba(darken($frame-color, 30), 0.3) inset,
     0 -10px 0 rgba(darken($frame-color, 20), 0.3) inset,
+
     0 5px 10px 5px rgba(black, 0.3);
+}
+
+.controls{
+  display: flex;
+  justify-content: space-between;
+}
+
+.control{
+  width: 100px;
+  height: 100px;
+  background: $control-color;
+  border-radius: 50%;
+  margin: 20px;
+  box-shadow:
+    2px  0 0 rgba(darken($control-shadow-color, 20), 0.3) inset,
+    -2px 0 0 rgba(darken($control-shadow-color, 20), 0.3) inset,
+
+    0 2px 0px rgba(lighten($control-shadow-color, 30), 0.8) inset,
+    0 4px 0px rgba(lighten($control-shadow-color, 70), 0.6) inset,
+    0 6px 0 rgba(lighten($control-shadow-color, 10), 0.3) inset,
+
+    0 -2px 0 rgba(darken($control-shadow-color, 10), 0.3) inset,
+    0 -4px 0 rgba(darken($control-shadow-color, 30), 0.3) inset,
+    0 -6px 0 rgba(darken($control-shadow-color, 20), 0.3) inset,
+    
+    0 3px 5px 3px rgba(black, 0.3);
+
+  span{
+    transition: transform 0.2s;
+
+    width: 80px;
+    height: 80px;
+    display: block;
+    padding: 10px;
+
+    &:before{
+      display: block;
+      content: ' ';
+      height: 30px;
+      width: 30px;
+
+      background: linear-gradient(rgba(lighten($control-shadow-color,20), 0.3),rgba($control-shadow-color, 0.3));
+      border-radius: 50%;
+      margin: auto;
+
+      box-shadow:
+        0 2px 0 rgba(darken($control-shadow-color, 10), 0.1) inset,
+        0 -2px 0 rgba(lighten($control-shadow-color, 60), 0.1) inset
+    }
+  }
+}
+
+.control--x{
+  span{
+    transform: rotate(calc(90deg * var(--direction-x)));
+  }
+}
+
+.control--y{
+  span{
+    transform: rotate(calc(90deg * var(--direction-y)));
+  }
 }

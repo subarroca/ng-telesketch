@@ -2,7 +2,7 @@ import { Segment } from './segment';
 import { Point } from './point';
 
 
-export class Drawing {
+export class Image {
   segments: Segment[] = [];
 
   startSegment(startPoint: Point) {

@@ -5,7 +5,7 @@
   
     <g>
       <path
-        *ngFor = "let segment of drawing.segments"
+        *ngFor = "let segment of image.segments"
         [attr.d] = segment.path>
       </path>
     </g>
@@ -17,4 +17,13 @@
       [attr.cy] = headingPoint.y
       r = 2></circle>
   </svg>
+
+  <div class="controls">
+    <div class="control control--x">
+      <span></span>
+    </div>
+    <div class="control control--y">
+      <span></span>
+    </div>
+  </div>
 </div>

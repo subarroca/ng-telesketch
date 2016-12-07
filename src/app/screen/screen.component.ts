@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { Segment } from '../shared/segment';
 import { Point } from '../shared/point';
-import { Drawing } from '../shared/drawing';
+import { Image } from '../shared/image';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class ScreenComponent implements OnInit {
   width: number = 800;
   height: number = 500;
 
-  private drawing: Drawing = new Drawing();
+  private image: Image = new Image();
 
   private headingPoint: Point = new Point();
 
@@ -40,54 +40,19 @@ export class ScreenComponent implements OnInit {
       .subscribe((event: KeyboardEvent) => {
         switch (event.code) {
           case 'ArrowUp':
-            if (this.lastDirection !== 'up') {
-              this.endSegment();
-              this.startSegment();
-            } else {
-              this.updateSegment();
-            }
-
-            this.setHeading(this.headingPoint.x, this.headingPoint.y - this.DELTA);
-            this.lastDirection = 'up';
+            this.parseKeyDown('up', 0, -1);
             break;
 
           case 'ArrowDown':
-            if (this.lastDirection !== 'down') {
-              this.endSegment();
-              this.startSegment();
-            } else {
-              this.updateSegment();
-            }
-
-            this.setHeading(this.headingPoint.x, this.headingPoint.y + this.DELTA);
-            this.lastDirection = 'down';
-
+            this.parseKeyDown('down', 0, 1);
             break;
 
           case 'ArrowLeft':
-            if (this.lastDirection !== 'left') {
-              this.endSegment();
-              this.startSegment();
-            } else {
-              this.updateSegment();
-            }
-
-            this.setHeading(this.headingPoint.x - this.DELTA, this.headingPoint.y);
-            this.lastDirection = 'left';
-
+            this.parseKeyDown('left', -1, 0);
             break;
 
           case 'ArrowRight':
-            if (this.lastDirection !== 'right') {
-              this.endSegment();
-              this.startSegment();
-            } else {
-              this.updateSegment();
-            }
-            
-            this.setHeading(this.headingPoint.x + this.DELTA, this.headingPoint.y);
-            this.lastDirection = 'right';
-
+            this.parseKeyDown('right', 1, 0);
             break;
 
           case 'Space':
@@ -99,24 +64,53 @@ export class ScreenComponent implements OnInit {
           //   break;
         }
       });
+
+
+    Observable
+      .fromEvent(document, 'keyup')
+      .subscribe((event: KeyboardEvent) => {
+        this.element.nativeElement.style.setProperty('--direction-x', 0);
+        this.element.nativeElement.style.setProperty('--direction-y', 0);
+      });
   }
 
   setHeading(x: number = this.width / 2, y: number = this.height / 2) {
-    this.headingPoint.x = x;
-    this.headingPoint.y = y;
+    if (x > 5 && x < this.width - 5) {
+      this.headingPoint.x = x;
+    }
+
+    if (y > 5 && y < this.height - 5) {
+      this.headingPoint.y = y;
+    }
   }
 
 
   startSegment() {
-    this.drawing.startSegment(this.headingPoint);
+    this.image.startSegment(this.headingPoint);
   }
 
   endSegment() {
-    this.drawing.endSegment(this.headingPoint);
+    this.image.endSegment(this.headingPoint);
   }
 
   updateSegment() {
-    this.drawing.updateSegment(this.headingPoint);
+    this.image.updateSegment(this.headingPoint);
+  }
+
+  parseKeyDown(direction: string, xDir: number, yDir: number) {
+    if (this.lastDirection !== direction) {
+      this.endSegment();
+      this.startSegment();
+    } else {
+      this.updateSegment();
+    }
+
+    this.setHeading(this.headingPoint.x + xDir * this.DELTA, this.headingPoint.y + yDir * this.DELTA);
+    this.lastDirection = direction;
+
+
+    this.element.nativeElement.style.setProperty('--direction-x', xDir);
+    this.element.nativeElement.style.setProperty('--direction-y', -yDir);
   }
 
 }
