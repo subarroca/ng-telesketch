@@ -1,13 +1,28 @@
 $line-color: #1f343c;
 $bg-color : #a28e6b;
+$frame-color: #c00;
 
-:host{
+.screen{
   background: radial-gradient(lighten($bg-color, 20),$bg-color);
   display: block;
   width: calc(var(--width) * 1px);
   height: calc(var(--height) * 1px);
   border-radius: 20px;
-  box-shadow: 0 2px 4px mix($bg-color, $line-color) inset;
+  margin: 40px 40px 120px;
+
+  box-shadow:
+    0 2px 4px mix($bg-color, $line-color) inset,
+
+    3px  0 0 rgba(darken($frame-color, 20), 0.3),
+    -3px 0 0 rgba(darken($frame-color, 20), 0.3),
+
+    0 3px 0 rgba($frame-color, 0.3),
+    0 5px 0 rgba(lighten($frame-color, 70), 0.3),
+    0 8px 0 rgba(lighten($frame-color, 20), 0.3),
+
+    0 -3px 0 rgba(darken($frame-color, 10), 0.3),
+    0 -5px 0 rgba(darken($frame-color, 30), 0.3),
+    0 -8px 0 rgba(darken($frame-color, 20), 0.3);
 }
 
 .heading{
@@ -17,4 +32,28 @@ $bg-color : #a28e6b;
 
 path {
   stroke: rgba($line-color, .8);
+}
+
+
+.holder{
+  border-radius: 40px;
+  background: linear-gradient(to bottom,
+    $frame-color 53%,
+    darken($frame-color,15) 53.5%,
+    darken($frame-color,15) 54.5%,
+    darken($frame-color, 10) 55%);
+  overflow: auto;
+
+  box-shadow:
+    5px  0 0 rgba(darken($frame-color, 20), 0.3) inset,
+    -5px 0 0 rgba(darken($frame-color, 20), 0.3) inset,
+
+    0 4px 0px rgba(lighten($frame-color, 30), 0.8) inset,
+    0 7px 0px rgba(lighten($frame-color, 70), 0.6) inset,
+    0 10px 0 rgba(lighten($frame-color, 10), 0.3) inset,
+
+    0 -5px 0 rgba(darken($frame-color, 10), 0.3) inset,
+    0 -8px 0 rgba(darken($frame-color, 30), 0.3) inset,
+    0 -10px 0 rgba(darken($frame-color, 20), 0.3) inset,
+    0 5px 10px 5px rgba(black, 0.3);
 }
